@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Game</title>
+    <link rel="stylesheet" href="assets/resetcss.CSS">
+    <link rel="stylesheet" type="text/css" href="./assets/style.CSS"/>
+</head>
+<div class="container" id="top">
+    <div id="home" class="flex-center flex-column">
+        <h1> Trivia Game</h1>
+        <a class="btn" href="#game">Start!</a>
+        <a class="btn" href="/rank.html">High Scores</a>
+    </div>
+</div>
+<body>
+    <div class="container" id="game">
+        <div id="game" class="flex-center flex-column">
+            <h2 id="question"> Question here</h2>
+            <div class="choice-container">
+                <p class="choice-prefix">A</p>
+                <p class= "choice-text" data-number="1"> Choice 1</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">B</p>
+                <p class= "choice-text" data-number="2"> Choice 2</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">C</p>
+                <p class= "choice-text" data-number="3"> Choice 3</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">D</p>
+                <p class= "choice-text" data-number="4"> Choice 4</p>
+            </div>
+            <a class="btn" href="#top">Back to Home</a>   
+        </div>
+    </div>   
+    <script src="./assets/main.JS"></script>
+</body>
+</html>
