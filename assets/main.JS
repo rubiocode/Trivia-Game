@@ -4,6 +4,7 @@
 var timerEl = document.getElementById('question-counter');
 var mainEl = document.querySelector('.timer-prefix');
 var timeLeft = 50;
+document.getElementById("begin").addEventListener("click", resetTimer);
 
 /*choices var */
 
@@ -25,12 +26,19 @@ const resultsContainer= document.getElementById("results");
 
 /*scores var */
 let score = 0;
+const scoreText = document.querySelector('#scoreID');
 
+incrementScore = num => {
+    score +=num;
+    scoreText.innerText=score;
+}
 
 const correct_bonus = 10;
 
 
 /*question vars */
+
+
 const question = document.getElementById("question");
 let currentQuestion= {};
 let questionCounter = 0;
@@ -81,6 +89,7 @@ let questions = [
 ]
 
 /* fuction to start the game to reset score and timer and to got through the array of questions object*/
+
 startGame = () => {
     questionCounter = 0;
     score = 0;
@@ -99,14 +108,15 @@ getNewQuestion = () => {
 
         choice.innerText= currentQuestion["choice" + number];
     });
-}
+}     
 
 function checkAnswer (event){
     event.preventDefault();
     const questionEL=availableQuestions[questionIndex];
     const dataNumber=event.target.getAttribute("data-number");
     if (questionEL === parseInt(dataNumber)) {
-        score++;
+        incrementScore(correct_bonus);
+        console.log(incrementScore);
     } else {
         timeLeft -=15;
     }
@@ -137,6 +147,11 @@ function countdown() {
     }
   }, 1000);
 }
+
+function resetTimer() {
+    timeLeft= 50;
+    countdown();
+  }
 
 function showResults() {
     containerEl.style.display='none';
