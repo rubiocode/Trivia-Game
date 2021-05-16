@@ -1,12 +1,22 @@
+/*Defining global variables and questions object*/
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 
+const choiceEl1=document.getElementById("choice1")
+const choiceEl2=document.getElementById("choice2")
+const choiceEl3=document.getElementById("choice3")
+const choiceEl4=document.getElementById("choice4")
+
+choiceEl1.addEventListener("click", checkAnswer)
+choiceEl2.addEventListener("click", checkAnswer)
+choiceEl3.addEventListener("click", checkAnswer)
+choiceEl4.addEventListener("click", checkAnswer)
+
 let currentQuestion= {};
-let acceptingAnswers= true;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions= [];
-
+let questionIndex = 0;
 const correct_bonus = 10;
 const max_questions= 5;
 
@@ -53,6 +63,7 @@ let questions = [
     },
 ]
 
+/* fuction to start the game to reset score and timer and to got through the array of questions object*/
 startGame = () => {
     questionCounter = 0;
     score = 0;
@@ -60,39 +71,40 @@ startGame = () => {
     getNewQuestion();
 }
 
+/*function to access questions from JS and replace text in HTML*/
 getNewQuestion = () => {
 
-    if(availableQuestions.length===0||questionCounter>=max_questions) {
-        return window.location.assign ("/end.html")
-    }
-
-    questionCounter++;
-    const questionIndex = Math.floor(Math.random()*availableQuestions.length);
-    currentQuestion=availableQuestions[questionIndex];
+    currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
     choices.forEach(choice => {
         const number = choice.dataset["number"];
+
         choice.innerText= currentQuestion["choice" + number];
     });
-    availableQuestions.splice(questionIndex, 1);
-
-    acceptingAnswers = true;
-
-
 }
-choices.forEach(choice => {
-    choice.addEventListener("click", () => {
 
-        if (acceptingAnswers === true) {
-            getNewQuestion();
-        } else {
-            alert ("Wrong Answer. Try Again.");
-        } 
-     });
-})
-
+function checkAnswer (event){
+    event.preventDefault();
+    const questionEL=availableQuestions[questionIndex];
+    const dataNumber=event.target.getAttribute("data-number");
+    if (questionEL.answer === parseInt(dataNumber)) {
+        alert("correct");
+    } else {
+        alert ("Wrong Answer");
+    }
+    questionIndex++;
+    if(questionIndex < availableQuestions.length) {
+        getNewQuestion();
+    } else {
+        prompt("Enter Name")
+    }
+}
 startGame();
+
+/*when question wrong deduct time from timer and move to next question*/ 
+/*missing timer and highscores*/ 
+
 
 
 
