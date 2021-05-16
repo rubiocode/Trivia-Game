@@ -128,34 +128,7 @@ p {
     font-weight: bolder;
     color: blue;
 }
-/*.quiz_box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 145px;
-    height:45px;
-    background: red;
-    border: 1rem solid yellow;
-    border: ;
-}
-.quiz_box header {
-    height: 70px;
-    padding: 0 30px;
-    background: white;
-    display: flex;
-    align-items:flex-end;
-    justify-content: space-between;
-    border-radius: 5px 5px 0 0;
-    box-shadow: 0px ;
-<div class="quiz_box">
-        <header>
-            <div class="timer">
-                <div id="time_text">Time Left</div>
-                <div class="time_sec">25</div>
-            </div>
-        </header>
 
-}*/
 /*game section*/
 .choice-container{
     display: flex;
@@ -180,16 +153,38 @@ p {
     width: 100%;
 }
 
-#hud {
+#timer {
     display: flex;
     justify-content: space-between;
 
 }
 .timer-prefix {
     text-align: center;
-    font-size: 2rem;
+    font-size: 3rem;
+    color: gray;
 }
 
 .timer-main-text {
     text-align: center;
+    padding-bottom: 5rem;
+}
+
+#timer-item{
+    float: right;
+}
+
+.again {
+    margin-top: 5rem;
+}
+
+input [type=text] , textarea , input {
+    width: 2rem 5rem;
+    padding: 2rem;
+    border: 0.5rem solid #ccc;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    margin-top:3rem;
+    margin-bottom:2rem;
+    color: black;
+    font-size: 2rem;
 }

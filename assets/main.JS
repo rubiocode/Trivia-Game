@@ -1,25 +1,42 @@
 /*Defining global variables and questions object*/
-const question = document.getElementById("question");
+
+/*timer vars */
+var timerEl = document.getElementById('question-counter');
+var mainEl = document.querySelector('.timer-prefix');
+var timeLeft = 50;
+
+/*choices var */
+
 const choices = Array.from(document.getElementsByClassName("choice-text"));
+const containerEl = document.getElementById("trivia");
+const choiceEl1=document.getElementById("choice1");
+const choiceEl2=document.getElementById("choice2");
+const choiceEl3=document.getElementById("choice3");
+const choiceEl4=document.getElementById("choice4");
 
-const choiceEl1=document.getElementById("choice1")
-const choiceEl2=document.getElementById("choice2")
-const choiceEl3=document.getElementById("choice3")
-const choiceEl4=document.getElementById("choice4")
 
-choiceEl1.addEventListener("click", checkAnswer)
-choiceEl2.addEventListener("click", checkAnswer)
-choiceEl3.addEventListener("click", checkAnswer)
-choiceEl4.addEventListener("click", checkAnswer)
+choiceEl1.addEventListener("click", checkAnswer);
+choiceEl2.addEventListener("click", checkAnswer);
+choiceEl3.addEventListener("click", checkAnswer);
+choiceEl4.addEventListener("click", checkAnswer);
 
-let currentQuestion= {};
+/*results vars */
+const resultsContainer= document.getElementById("results");
+
+/*scores var */
 let score = 0;
+
+
+const correct_bonus = 10;
+
+
+/*question vars */
+const question = document.getElementById("question");
+let currentQuestion= {};
 let questionCounter = 0;
 let availableQuestions= [];
 let questionIndex = 0;
-const correct_bonus = 10;
 const max_questions= 5;
-
 let questions = [
     {
         question:"Inside which HTML element do we put the JavaScript?",
@@ -88,22 +105,42 @@ function checkAnswer (event){
     event.preventDefault();
     const questionEL=availableQuestions[questionIndex];
     const dataNumber=event.target.getAttribute("data-number");
-    if (questionEL.answer === parseInt(dataNumber)) {
-        alert("correct");
+    if (questionEL === parseInt(dataNumber)) {
+        score++;
     } else {
-        alert ("Wrong Answer");
+        timeLeft -=15;
     }
     questionIndex++;
     if(questionIndex < availableQuestions.length) {
         getNewQuestion();
     } else {
-        prompt("Enter Name")
+        showResults();
     }
 }
 startGame();
 
 /*when question wrong deduct time from timer and move to next question*/ 
 /*missing timer and highscores*/ 
+
+// Timer that counts down from 5
+function countdown() {
+  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  var timeInterval = setInterval(function () {
+     // Set the `textContent` of `timerEl` to show the remaining seconds
+    timerEl.textContent = timeLeft + " sec";
+    // Decrement `timeLeft` by 1
+    timeLeft--;
+    if ((timeLeft <=0) || (questionIndex >5)) {
+     clearInterval(timeInterval);
+     showResults();
+     
+    }
+  }, 1000);
+}
+
+function showResults() {
+    containerEl.style.display='none';
+}
 
 
 

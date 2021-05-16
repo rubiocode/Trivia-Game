@@ -23,37 +23,39 @@
         <div class= "flex-center flex-column">
             <h2>Trivia Rules</h2>
             <div class="info_rules">
-            <div class="rules">1. Total timer is <span>25 seconds</span> for all 5 questions.</div>
+            <div class="rules">1. Total timer is <span>50 seconds</span> for all 5 questions.</div>
             <div class="rules">2. Once you select your answer, you cannot reselect.</div>
-            <div class="rules">3. If you select the wrong answer <span>10 seconds</span> will be deducted from timer.</div>
+            <div class="rules">3. If you select the wrong answer <span>15 seconds</span> will be deducted from timer.</div>
             <div class="rules">4. You cannot select any options once you run out of time</div>
             <div class="rules">5. at the end, you can check your highest score! Good Luck!</div>
             
         </div>
-        <a class="btn" href="#trivia">Continue</a>
+        <a class="btn" href="#trivia" id="begin">Continue</a>
             <a class="btn" href="#top">Back to Home</a> 
         </div>
         
     </div>
+
     <!-- Trivia Game -->
-    
-    
     <div class="container" id="trivia">
-        <div id="game" class="flex-center flex-column">
-            <div id="hud">
-                <div id="hud-item">
-                   <p class="hud-prefix">
-                    Time left
-                   </p>
-                   <h1 class="hud-main-text" id="question-counter"> 25sec </h1>
-                </div>
-                <div id="hud-item">
-                    <p class="hud-prefix">
-                     Score
-                    </p>
-                    <h1 class="hud-main-text" id="score"> 0 </h1>
-                 </div>
-            </div>
+        <div>
+    <!--Timer and Score section-->
+    <div id="timer">
+        <div id="timer-item">
+            <p class="timer-prefix">
+            Timer
+            </p>
+            <h3 class="timer-main-text" id="question-counter"> </h3>
+        </div>
+        <div id="score-item">
+            <p class="timer-prefix">
+            Score
+            </p>
+            <h3 class="timer-main-text" id="score"> 0 </h3>
+        </div>
+    </div>
+    <!--Quiz section-->
+    <div id="game" class="flex-center flex-column"> 
             <h2 id="question"> Question here</h2>
             <div class="choice-container">
                 <p class="choice-prefix">A</p>
@@ -72,8 +74,41 @@
                 <p class= "choice-text" id="choice4" data-number="4"> Choice 4</p>
             </div>
             <a class="btn" href="#top">Back to Home</a>   
-        </div>     
+        </div>  
+        </div>   
     </div>  
+    <div class="container" id="results" data-state= "hidden">
+        <div>
+          <div class="text-center">
+            <h1>Your Final Score:</h1>
+            <div>
+              <h1 id="show-score">0/5</h1>
+            </div>
+            <div id="form">
+              <hr>
+              <form>
+                  <div class="again">
+                <h3 class="text-center">
+                  Save your score?
+                </h3>
+                <div>
+                  <div>
+                    <input type="text" name="user-initials" id="user-initials"
+                    placeholder="Enter your initials" />
+                  </div>
+                </div>
+              </form>
+            </div>
+            </div>
+            <div class="again">
+                <button type="button" class="btn" id="save">Save</button>
+                <button id="again-btn" type="button" class="btn">
+                Play again!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     <script src="./assets/main.JS"></script>
 </body>
 </html>
