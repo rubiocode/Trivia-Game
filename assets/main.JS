@@ -1,5 +1,6 @@
 /*Defining global variables*/
 
+const againbtnEl=document.getElementById("againbtn");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const choiceEl1=document.getElementById("choice1");
 const choiceEl2=document.getElementById("choice2");
@@ -30,6 +31,7 @@ let timeLeft = 50;
 
 
 /*click event creating two responses created individual click events to prevent double response */
+againbtnEl.addEventListener("click", home);
 choiceEl1.addEventListener("click", checkAnswer);
 choiceEl2.addEventListener("click", checkAnswer);
 choiceEl3.addEventListener("click", checkAnswer);
@@ -96,12 +98,10 @@ function startGame (){
 
 // get new questions from object and insert in HTML
 function getNewQuestion(){
-    questionIndex = Math.floor(Math.random() * availableQuestions.length);
+
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
 
-    /*currentQuestion = availableQuestions[questionIndex];
-    question.innerText = currentQuestion.question;*/
     
     choices.forEach(choice => {
         const number = choice.dataset["number"];
@@ -135,6 +135,13 @@ function showResults() {
     containerEl.style.display='none';
     finalScoreEl.innerText=score;
     window.location="#navigateHere";
+}
+
+//unhides game container in html
+function home (){
+    containerEl.style.display='block';
+    resetTimer();
+    score=0;
 }
 
 //saving scores to Local storage

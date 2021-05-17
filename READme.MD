@@ -5,6 +5,7 @@ This application is an interactive trivia game which provides the user with five
 ## Submission
 
 **Deployed URL:** https://rubiocode.github.io/Trivia-Game/index.HTML
+
 **Github:** https://github.com/rubiocode/Trivia-Game 
 
 
