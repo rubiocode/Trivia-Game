@@ -24,6 +24,7 @@ choiceEl4.addEventListener("click", checkAnswer);
 /*results vars */
 const resultsContainer= document.getElementById("results");
 
+
 /*scores var */
 let score = 0;
 const scoreText = document.querySelector('#scoreID');
@@ -31,6 +32,7 @@ const scoreText = document.querySelector('#scoreID');
 incrementScore = num => {
     score +=num;
     scoreText.innerText=score;
+    finalScoreEl.innerText=score;
 }
 
 const correct_bonus = 10;
@@ -155,7 +157,7 @@ function resetTimer() {
    
 function showResults() {
     containerEl.style.display='none';
-    saveHighScore();
+    finalScoreEl.innerText=score;
 }
 
 const playAgain = document.getElementById('again-btn');
@@ -168,7 +170,7 @@ function playAgainfx() {
 }*/
 
 const username = document.querySelector('#username');
-const saveBtn= document.getElementById('save')
+var saveButton = document.getElementById("save");
 const mostRecentScore= localStorage.getItem('mostRecentScore');
 const finalScoreEl= document.querySelector('#finalScore')
 
@@ -176,15 +178,25 @@ const finalScoreEl= document.querySelector('#finalScore')
 const highScores= JSON.parse(localStorage.getItem('highScores')) ||[];
 
 
-const max_high_scores = 5;
-finalScoreEl.innerText=mostRecentScore;
+const max_high_scores = 10;
+
+
+finalScoreEl.innerText=score;
 
 username.addEventListener('keyup', ()=>{
-saveBtn.disabled = !username.value;
-})
+saveButton.disabled = !username.value;
 
-saveHighScore = (e)=> {
-    e.preventDefault();
+})
+saveButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    saveHighScore();
+     ;
+    });
+    
+
+
+function saveHighScore(event) {
+    event.preventDefault();
 
     const score1 = {
         score1: score,
@@ -196,10 +208,10 @@ highScores.push(score1);
 
 highScores.sort((a,b)=> b.score1 -a.score1);
 
-    highScores.splice (5);
+highScores.splice (10);
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
-    window.location.assign('/');
+    window.location.assign('/')
 };
 
 
@@ -209,6 +221,10 @@ const highScores1 = JSON.parse(localStorage.getItem("highScores")) || [];
 
 highScoreListEl.innerHTML = highScores1
 .map (highScore1 => {
-return `<li class="high-score"> ${highScore1.name} - ${highScore1.score}</li>`;
-}); 
+return `<li class="high-score"> ${highScore1.name} - ${highScore1.score1}</li>`;
+});
 /* this is breaking code .join("");*/
+
+
+
+
