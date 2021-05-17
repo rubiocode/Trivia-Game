@@ -20,7 +20,7 @@
 
     <!-- Instructions Box-->
     <div class="container"  id="instructions">
-        <div class= "flex-center flex-column">
+        <div class= "flex-center flex-column" id="rules">
             <h2>Trivia Rules</h2>
             <div class="info_rules">
             <div class="rules">1. Total timer is <span>50 seconds</span> for all 5 questions.</div>
@@ -72,8 +72,7 @@
             <div class="choice-container">
                 <p class="choice-prefix">D</p>
                 <p class= "choice-text" id="choice4" data-number="4"> Choice 4</p>
-            </div>
-            <a class="btn" href="#top">Back to Home</a>   
+            </div> 
         </div>  
         </div>   
     </div>  
@@ -86,7 +85,7 @@
                         <h1>Your Final Score:</h1>
                     </div>
                     <div>
-                        <h1 id="finalScore">0/5</h1>
+                        <h1 id="finalScore"></h1>
                     </div>
                     <div id="form">
                     <hr>
@@ -110,7 +109,7 @@
         <div class="again">
             <div class= "flex-center flex-column">
                 <button type="button" class="btn" id="save" onclick="saveHighScore(event)" disabled>Save</button>
-                <a class="btn" href="#trivia" id="againbtn">Home</a>
+                <a class="btn" id="againbtn" href="#home">Home</a>  
                 <a class="btn"  href="#rules" id="againbtn2">Play again!</a>
             </div>
         </div>

@@ -37,7 +37,7 @@ choiceEl4.addEventListener("click", checkAnswer);
 
 /*event listeners */
 
-document.getElementById("begin").addEventListener("click", resetTimer);
+document.querySelector("#begin").addEventListener("click", startGame);
 
 /*questions var */
 let questions = [
@@ -87,7 +87,7 @@ let questions = [
 
 // Start game
 
-startGame = () => {
+function startGame (){
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
@@ -95,10 +95,13 @@ startGame = () => {
 }
 
 // get new questions from object and insert in HTML
-getNewQuestion = () => {
-    
+function getNewQuestion(){
+    questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
+
+    /*currentQuestion = availableQuestions[questionIndex];
+    question.innerText = currentQuestion.question;*/
     
     choices.forEach(choice => {
         const number = choice.dataset["number"];
@@ -131,6 +134,7 @@ function checkAnswer (event){
 function showResults() {
     containerEl.style.display='none';
     finalScoreEl.innerText=score;
+    window.location="#navigateHere";
 }
 
 //saving scores to Local storage
@@ -150,6 +154,7 @@ highScores.sort((a,b)=> b.score1 -a.score1);
 highScores.splice (10);
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
+    
 };
 
 highScoreListEl.innerHTML = highScores
@@ -185,6 +190,7 @@ function countdown() {
 function resetTimer() {
     timeLeft= 50;
     countdown();
+    
     }
 
 //save button click event to disable butto at not entry and to save scores
