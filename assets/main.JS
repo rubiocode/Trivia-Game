@@ -24,6 +24,7 @@ let currentQuestion= {};
 let mainEl = document.querySelector('.timer-prefix');
 let questionCounter = 0;
 let questionIndex = 0;
+let refreshButtonEl = document.querySelector('#refresh-btn');
 let saveButton = document.getElementById("save");
 let score = 0;
 let timerEl = document.getElementById('question-counter');
@@ -211,5 +212,10 @@ saveButton.addEventListener("click", function(event) {
 });
 
 startGame();
+
+refreshButtonEl.addEventListener('click', function () {
+    location.reload();
+});
+
 
 
