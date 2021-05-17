@@ -91,10 +91,10 @@ let questions = [
 /* fuction to start the game to reset score and timer and to got through the array of questions object*/
 
 startGame = () => {
-    questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
+    resetTimer();
 }
 
 /*function to access questions from JS and replace text in HTML*/
@@ -114,9 +114,8 @@ function checkAnswer (event){
     event.preventDefault();
     const questionEL=availableQuestions[questionIndex];
     const dataNumber=event.target.getAttribute("data-number");
-    if (questionEL === parseInt(dataNumber)) {
+    if (questionEL.answer === parseInt(dataNumber)) {
         incrementScore(correct_bonus);
-        console.log(incrementScore);
     } else {
         timeLeft -=15;
     }
@@ -125,6 +124,7 @@ function checkAnswer (event){
         getNewQuestion();
     } else {
         showResults();
+        localStorage.setItem('mostRecentScore', score)
     }
 }
 startGame();
@@ -152,11 +152,63 @@ function resetTimer() {
     timeLeft= 50;
     countdown();
   }
-
+   
 function showResults() {
     containerEl.style.display='none';
+    saveHighScore();
 }
 
+const playAgain = document.getElementById('again-btn');
+
+/*playAgain.addEventListener('click', playAgainfx)
+
+function playAgainfx() {
+ window.location.assign('/');
+
+}*/
+
+const username = document.querySelector('#username');
+const saveBtn= document.getElementById('save')
+const mostRecentScore= localStorage.getItem('mostRecentScore');
+const finalScoreEl= document.querySelector('#finalScore')
 
 
+const highScores= JSON.parse(localStorage.getItem('highScores')) ||[];
 
+
+const max_high_scores = 5;
+finalScoreEl.innerText=mostRecentScore;
+
+username.addEventListener('keyup', ()=>{
+saveBtn.disabled = !username.value;
+})
+
+saveHighScore = (e)=> {
+    e.preventDefault();
+
+    const score1 = {
+        score1: score,
+        name: username.value,
+    };
+    console.log("score1", score1);
+
+highScores.push(score1);
+
+highScores.sort((a,b)=> b.score1 -a.score1);
+
+    highScores.splice (5);
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    window.location.assign('/');
+};
+
+
+const highScoreListEl = document.getElementById ('highScoreList1');
+const highScores1 = JSON.parse(localStorage.getItem("highScores")) || [];
+
+
+highScoreListEl.innerHTML = highScores1
+.map (highScore1 => {
+return `<li class="high-score"> ${highScore1.name} - ${highScore1.score}</li>`;
+}); 
+/* this is breaking code .join("");*/
