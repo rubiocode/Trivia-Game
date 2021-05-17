@@ -1,9 +1,11 @@
+/*Single Element styling*/
 * {
     box-sizing: border-box;
+    color: #ecf5ff;
     font-family: sans-serif, Arial, Helvetica;
     margin: 0;
     padding: 0;
-    color: #ecf5ff
+    
 }
 html {
     background-color:rgb(2, 0, 10);
@@ -15,8 +17,8 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 5.4rem;
     color: #ecf5ff;
+    font-size: 5.4rem;
     margin-bottom: 5rem;
 }
 
@@ -27,8 +29,8 @@ h1 > span {
 
 h2 {
     font-size: 4.2rem;
-    margin-bottom: 4rem;
     font-weight: 700;
+    margin-bottom: 4rem;
 }
 
 h3 {
@@ -40,31 +42,47 @@ p {
     color: black;
 }
 
-/*utilities*/
-
-.container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 80rem;
-    margin: 0 auto;
+input [type=text] , textarea , input {
+    border: 0.5rem solid #ccc;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    color: black;
+    font-size: 2rem;
+    margin-bottom:2rem;
+    margin-top:3rem;
     padding: 2rem;
+    width: 2rem 5rem;
+}
+
+/*Styling of container class (all sections have container class divs)*/
+.container {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 2rem;
+    width: 100vw;
 }
 
 .container >* {
     width: 100%;
 }
 
+.container .info_rules .rules span {
+    color: blue;
+    font-weight: bolder;
+}
+
 .flex-column {
-    display: flex;
     flex-direction: column;
+    display: flex;
 }
 
 .flex-center {
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .justify-center {
@@ -79,18 +97,18 @@ p {
     display: none;
 }
 
-/*Buttons*/
+/*styling buttons for the entire application*/
 
 .btn {
-    font-size: 1.8rem;
-    padding: 1rem 0;
-    width: 20rem;
-    text-align: center;
-    border: 0.1rem, solid #dfe9f3;
-    margin-bottom: 1rem;
-    text-decoration: none;
-    color: #030000;
     background-color: white;
+    border: 0.1rem, solid #dfe9f3;
+    color: #030000;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    text-align: center;
+    text-decoration: none;
+    width: 20rem;
 }
 
 .btn:hover {
@@ -102,50 +120,53 @@ p {
     transition: transform 150ms;
 }
 .btn[disabled]:hover {
-    cursor: not-allowed;
     box-shadow: none;
+    cursor: not-allowed;
     transform: none;
 }
 
-/*Rules section*/
+#againbtn{
+    color: black;
+    font-size: 2.5rem;
+    padding-top: 2rem;
+    text-decoration: none;
+}
+
+/*styling of Rules section*/
 .info_rules {
-    font-size: 5.8rem;
-    font-weight: bold;
-    line-height: 2;
-    margin-bottom: 3rem;
-    padding-top: 5rem;
-    padding-bottom:5rem;
-    padding-left: 10rem;
+    border: 1rem solid rgb(155, 155, 15);
     display: flex;
     flex-direction: column;
-    width: 100%;
     font-size: 1.8rem;
-    border: 1rem solid rgb(155, 155, 15);
+    font-weight: bold;
     justify-content:center;
+    line-height: 2;
+    margin-bottom: 3rem;
+    padding-bottom:5rem;
+    padding-left: 10rem;
+    padding-top: 5rem;
+    width: 100%;
 }
 
-.container .info_rules .rules span {
-    font-weight: bolder;
-    color: blue;
-}
 
-/*game section*/
+
+/*styling of game section*/
 .choice-container{
+    background-color: white;
+    border: 0.1rem solid rgb (86, 165, 235, 0.25);
     display: flex;
+    font-size: 1.8rem;
     margin-bottom: 0.5rem;
     width: 100%;
-    font-size: 1.8rem;
-    border: 0.1rem solid rgb (86, 165, 235, 0.25);
-    background-color: white;
 }
 
 .choice-container:hover {
     box-shadow: 0 0.4rem 1.4rem 0 blue;
 }
 .choice-prefix{
-    padding: 1.5rem 2.5rem;
     background-color: rgb(114, 114, 108);
     color: white;
+    padding: 1.5rem 2.5rem;
 }
 
 .choice-text {
@@ -153,20 +174,22 @@ p {
     width: 100%;
 }
 
+
+/*Timer and score styling section*/
 #timer {
     display: flex;
     justify-content: space-between;
 
 }
 .timer-prefix {
-    text-align: center;
-    font-size: 3rem;
     color: gray;
+    font-size: 3rem;
+    text-align: center;
 }
 
 .timer-main-text {
-    text-align: center;
     padding-bottom: 5rem;
+    text-align: center;
 }
 
 #timer-item{
@@ -177,28 +200,11 @@ p {
     margin-top: 5rem;
 }
 
-input [type=text] , textarea , input {
-    width: 2rem 5rem;
-    padding: 2rem;
-    border: 0.5rem solid #ccc;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    margin-top:3rem;
-    margin-bottom:2rem;
-    color: black;
-    font-size: 2rem;
-}
-#againbtn{
-    color: black;
-    text-decoration: none;
-    font-size: 2.5rem;
-    padding-top: 2rem;
-}
-
+/*Results section styling*/
 #highScoreList1 {
     list-style: none;
-    padding-left: 0;
     margin-bottom: 4rem;
+    padding-left: 0;
 
 }
 

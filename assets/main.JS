@@ -1,52 +1,45 @@
-/*Defining global variables and questions object*/
-
-/*timer vars */
-var timerEl = document.getElementById('question-counter');
-var mainEl = document.querySelector('.timer-prefix');
-var timeLeft = 50;
-document.getElementById("begin").addEventListener("click", resetTimer);
-
-/*choices var */
+/*Defining global variables*/
 
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-const containerEl = document.getElementById("trivia");
 const choiceEl1=document.getElementById("choice1");
 const choiceEl2=document.getElementById("choice2");
 const choiceEl3=document.getElementById("choice3");
 const choiceEl4=document.getElementById("choice4");
+const containerEl = document.getElementById("trivia");
+const correct_bonus = 10; 
+const finalScoreEl= document.querySelector('#finalScore')
+const highScores= JSON.parse(localStorage.getItem('highScores')) ||[];
+const highScoreListEl = document.getElementById ('highScoreList1');
+const max_high_scores = 10;
+const max_questions= 5;
+const mostRecentScore= localStorage.getItem('mostRecentScore');
+const question = document.getElementById("question");
+const resultsContainer= document.getElementById("results");
+const scoreText = document.querySelector('#scoreID');
+const username = document.querySelector('#username');
+
+let availableQuestions= [];
+let currentQuestion= {};
+let mainEl = document.querySelector('.timer-prefix');
+let questionCounter = 0;
+let questionIndex = 0;
+let saveButton = document.getElementById("save");
+let score = 0;
+let timerEl = document.getElementById('question-counter');
+let timeLeft = 50;
 
 
+/*click event creating two responses created individual click events to prevent double response */
 choiceEl1.addEventListener("click", checkAnswer);
 choiceEl2.addEventListener("click", checkAnswer);
 choiceEl3.addEventListener("click", checkAnswer);
 choiceEl4.addEventListener("click", checkAnswer);
 
-/*results vars */
-const resultsContainer= document.getElementById("results");
+/*event listeners */
 
+document.getElementById("begin").addEventListener("click", resetTimer);
 
-/*scores var */
-let score = 0;
-const scoreText = document.querySelector('#scoreID');
-
-incrementScore = num => {
-    score +=num;
-    scoreText.innerText=score;
-    finalScoreEl.innerText=score;
-}
-
-const correct_bonus = 10;
-
-
-/*question vars */
-
-
-const question = document.getElementById("question");
-let currentQuestion= {};
-let questionCounter = 0;
-let availableQuestions= [];
-let questionIndex = 0;
-const max_questions= 5;
+/*questions var */
 let questions = [
     {
         question:"Inside which HTML element do we put the JavaScript?",
@@ -90,7 +83,9 @@ let questions = [
     },
 ]
 
-/* fuction to start the game to reset score and timer and to got through the array of questions object*/
+/* FUNCTIONS*/
+
+// Start game
 
 startGame = () => {
     score = 0;
@@ -99,19 +94,20 @@ startGame = () => {
     resetTimer();
 }
 
-/*function to access questions from JS and replace text in HTML*/
+// get new questions from object and insert in HTML
 getNewQuestion = () => {
-
+    
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
-
+    
     choices.forEach(choice => {
         const number = choice.dataset["number"];
-
+        
         choice.innerText= currentQuestion["choice" + number];
     });
 }     
 
+//Check answer if correct add score if incorrect subtract time from timer
 function checkAnswer (event){
     event.preventDefault();
     const questionEL=availableQuestions[questionIndex];
@@ -126,75 +122,18 @@ function checkAnswer (event){
         getNewQuestion();
     } else {
         showResults();
+        resetTimer();
         localStorage.setItem('mostRecentScore', score)
     }
 }
-startGame();
 
-/*when question wrong deduct time from timer and move to next question*/ 
-/*missing timer and highscores*/ 
-
-// Timer that counts down from 5
-function countdown() {
-  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
-     // Set the `textContent` of `timerEl` to show the remaining seconds
-    timerEl.textContent = timeLeft + " sec";
-    // Decrement `timeLeft` by 1
-    timeLeft--;
-    if ((timeLeft <=0) || (questionIndex >5)) {
-     clearInterval(timeInterval);
-     showResults();
-     
-    }
-  }, 1000);
-}
-
-function resetTimer() {
-    timeLeft= 50;
-    countdown();
-  }
-   
+// hides question container from HTML
 function showResults() {
     containerEl.style.display='none';
     finalScoreEl.innerText=score;
 }
 
-const playAgain = document.getElementById('again-btn');
-
-/*playAgain.addEventListener('click', playAgainfx)
-
-function playAgainfx() {
- window.location.assign('/');
-
-}*/
-
-const username = document.querySelector('#username');
-var saveButton = document.getElementById("save");
-const mostRecentScore= localStorage.getItem('mostRecentScore');
-const finalScoreEl= document.querySelector('#finalScore')
-
-
-const highScores= JSON.parse(localStorage.getItem('highScores')) ||[];
-
-
-const max_high_scores = 10;
-
-
-finalScoreEl.innerText=score;
-
-username.addEventListener('keyup', ()=>{
-saveButton.disabled = !username.value;
-
-})
-saveButton.addEventListener("click", function(event) {
-    event.preventDefault();
-    saveHighScore();
-     ;
-    });
-    
-
-
+//saving scores to Local storage
 function saveHighScore(event) {
     event.preventDefault();
 
@@ -211,20 +150,53 @@ highScores.sort((a,b)=> b.score1 -a.score1);
 highScores.splice (10);
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
-    window.location.assign('/')
 };
 
-
-const highScoreListEl = document.getElementById ('highScoreList1');
-const highScores1 = JSON.parse(localStorage.getItem("highScores")) || [];
-
-
-highScoreListEl.innerHTML = highScores1
+highScoreListEl.innerHTML = highScores
 .map (highScore1 => {
 return `<li class="high-score"> ${highScore1.name} - ${highScore1.score1}</li>`;
 });
-/* this is breaking code .join("");*/
 
+/*UTILITIES */
+// Score function to make sure score increments by 10 for correct answers
+incrementScore = num => {
+    score +=num;
+    scoreText.innerText=score;
+    finalScoreEl.innerText=score;
+}
 
+// Timer function countdown from 50 to 0
+function countdown() {
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+     // Set the `textContent` of `timerEl` to show the remaining seconds
+    timerEl.textContent = timeLeft + " sec";
+    // Decrement `timeLeft` by 1
+    timeLeft--;
+    if ((timeLeft <=0) || (questionIndex >5)) {
+        clearInterval(timeInterval);
+        showResults();
+        }
+    }, 1000);
+}
+
+//reset function to reset timer once game is reloaded and when is over 
+
+function resetTimer() {
+    timeLeft= 50;
+    countdown();
+    }
+
+//save button click event to disable butto at not entry and to save scores
+username.addEventListener('keyup', ()=>{
+    saveButton.disabled = !username.value;   
+});
+
+saveButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    saveHighScore();
+});
+
+startGame();
 
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/style.CSS"/>
 </head>
 <body>
-    <!-- Trivia Game Home Page -->
+    <!-- Home -->
     <div class="container" id="top">
         <div id="home" class="flex-center flex-column">
             <h1> Trivia Game</h1>
@@ -18,43 +18,42 @@
         </div>
     </div>
 
-    <!-- Trivia Instructions Box-->
-    <div>
-        <div class="container"  id="instructions">
-            <div class= "flex-center flex-column">
-                <h2>Trivia Rules</h2>
-                <div class="info_rules">
-                <div class="rules">1. Total timer is <span>50 seconds</span> for all 5 questions.</div>
-                <div class="rules">2. Once you select your answer, you cannot reselect.</div>
-                <div class="rules">3. If you select the wrong answer <span>15 seconds</span> will be deducted from timer.</div>
-                <div class="rules">4. You cannot select any options once you run out of time</div>
-                <div class="rules">5. at the end, you can check your highest score! Good Luck!</div>    
-            </div>
-            <a class="btn" href="#trivia" id="begin">Continue</a>
+    <!-- Instructions Box-->
+    <div class="container"  id="instructions">
+        <div class= "flex-center flex-column">
+            <h2>Trivia Rules</h2>
+            <div class="info_rules">
+            <div class="rules">1. Total timer is <span>50 seconds</span> for all 5 questions.</div>
+            <div class="rules">2. Once you select your answer, you cannot reselect.</div>
+            <div class="rules">3. If you select the wrong answer <span>15 seconds</span> will be deducted from timer.</div>
+            <div class="rules">4. You cannot select any options once you run out of time</div>
+            <div class="rules">5. at the end, you can check your highest score! Good Luck!</div>
+            
+        </div>
+        <a class="btn" href="#trivia" id="begin">Continue</a>
             <a class="btn" href="#top">Back to Home</a> 
         </div>
+        
     </div>
 
-    <!-- Trivia Game Componets -->
-
+    <!-- Trivia Game -->
     <div class="container" id="trivia">
         <div>
     <!--Timer and Score section-->
-            <div id="timer">
-                <div id="timer-item">
-                    <p class="timer-prefix"> 
-                        Timer 
-                    </p>
-                    <h3 class="timer-main-text" id="question-counter"></h3>
-                </div>
-                <div id="score-item">
-                    <p class="timer-prefix">
-                        Score
-                    </p>
-                    <h3 class="timer-main-text" id="scoreID"></h3>
-                </div>
-            </div>
+    <div id="timer">
+        <div id="timer-item">
+            <p class="timer-prefix">
+            Timer
+            </p>
+            <h3 class="timer-main-text" id="question-counter"> </h3>
         </div>
+        <div id="score-item">
+            <p class="timer-prefix">
+            Score
+            </p>
+            <h3 class="timer-main-text" id="scoreID"></h3>
+        </div>
+    </div>
     <!--Quiz section-->
     <div id="game" class="flex-center flex-column"> 
             <h2 id="question"> Question here</h2>
@@ -78,51 +77,55 @@
         </div>  
         </div>   
     </div>  
+    <!--Show final score and form section-->
     <div class="container" id="results" data-state= "hidden">
         <div class= "flex-center flex-column">
-        <div>
-          <div class="text-center">
-            <h1>Your Final Score:</h1>
             <div>
-              <h1 id="finalScore">0/5</h1>
-            </div>
-            <div id="form">
-              <hr>
-              <form>
-                  <div class="again">
-                <h3 class="text-center">
-                  Save your score?
-                </h3>
-                <div>
-                  <div>
-                    <input 
-                    type="text" 
-                    name="user-initials" 
-                    id="username"
-                    placeholder="Enter your initials" />
-                  </div>
+                <div class="text-center">
+                    <div>
+                        <h1>Your Final Score:</h1>
+                    </div>
+                    <div>
+                        <h1 id="finalScore">0/5</h1>
+                    </div>
+                    <div id="form">
+                    <hr>
+                        <form>
+                            <div class="again">
+                                <h3 class="text-center">
+                                Save your score?
+                                </h3>
+                            </div>
+                            <div>
+                            <input 
+                            type="text" 
+                            name="user-initials" 
+                            id="username"
+                            placeholder="Enter your initials" />
+                        </form>
+                    </div>
                 </div>
-              </form>
             </div>
-            </div>
-            <div class="again">
-                <div class= "flex-center flex-column">
+        </div>
+        <div class="again">
+            <div class= "flex-center flex-column">
                 <button type="button" class="btn" id="save" onclick="saveHighScore(event)" disabled>Save</button>
                 <a class="btn" href="#trivia" id="againbtn">Home</a>
                 <a class="btn"  href="#rules" id="againbtn2">Play again!</a>
-                </div>
-                </div>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-      <div class="container" id="list">
-        <div id="highScores1" class= "flex-center flex-column">
-          <h2 id="finalScore1">High Scores</h2>
-          <ul id= "highScoreList1"></ul>
-        <a class="btn" href="#top">Back to Home</a> 
 </div>
-      </div>
+<!--Highest Scores List-->
+<div>
+    <div class="container" id="list">
+        <div id="highScores1" class= "flex-center flex-column">
+            <h2 id="finalScore1">High Scores</h2>
+            <ul id= "highScoreList1"></ul>
+            <a class="btn" href="#top">Back to Home</a> 
+        </div>
+    </div>
+</div>
     <script src="./assets/main.JS"></script>
 </body>
 </html>
